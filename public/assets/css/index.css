@@ -23,3 +23,6 @@ body,body *{
 .content-wal-page{
     min-height: 600px;
 }
+.invalid-feedback{
+    display: block;
+}

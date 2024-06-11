@@ -12,6 +12,9 @@
         </span>
         @enderror
         <br>
+        <p> فرمت های قابل قبول : png,jpg,jpeg</p>
+        <p> حداکثر حجم قابل قبول : 2MB</p>
+        <br>
         <button type="submit" class="btn btn-success">آپلود</button>
     </form>
 </div>
