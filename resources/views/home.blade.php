@@ -1,0 +1,10 @@
+@extends('layouts.template')
+@section('title','خانه')
+@section('more_style')
+<style>
+</style>
+@endsection
+@section('more_js')
+<script>
+</script>
+@endsection

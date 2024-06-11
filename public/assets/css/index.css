@@ -1,0 +1,25 @@
+body,body *{
+    direction: rtl !important;
+}
+
+.nav-wal-page{
+    padding: 10px;
+}
+
+.nav-wal-page .nav{
+    display: flex;
+    padding-right: 0;
+    margin-bottom: 5px;
+    list-style: none;
+}
+.footer-wal-page div{
+    background: #575795;
+    padding: 20px;
+    text-align: center;
+    margin: 20px;
+    color: white;
+}
+
+.content-wal-page{
+    min-height: 600px;
+}
