@@ -17,6 +17,11 @@
             @include('layouts.nav')
         </div>
     </div>
+    @if(session('success'))
+    <div class="alert alert-success m-2">
+        {{session('success')}}
+    </div>
+    @endif
     <div class="content-wal-page m-2 p-2">
         @yield('content')
     </div>

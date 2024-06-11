@@ -21,6 +21,20 @@
 <hr>
 <div>
     <h3>فایل های آپلود شده تاکنون</h3>
+    <div class="card">
+        @if($files_number !=0)
+
+        <div>
+            <div id="icc_pagination_box" class="p-4"> {{ $files->links() }} </div>
+        </div>
+        @else
+        <div class="p-3">
+            <div style="text-align: center;" class="alert alert-secondary">
+                فایلی برای آپلود وجود ندارد !
+            </div>
+        </div>
+        @endif
+    </div>
 </div>
 @endsection
 @section('more_style')
