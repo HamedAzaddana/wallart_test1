@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Product;
+use App\Models\Product as ProductModel;
 use Illuminate\Http\Request;
+
 
 class ProductController extends Controller
 {
@@ -14,18 +15,11 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        $products = ProductModel::get()->toArray();
+        $products_number = count($products);
+        return view('pages.products',compact('products','products_number'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -33,7 +27,7 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store()
     {
         //
     }

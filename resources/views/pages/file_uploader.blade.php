@@ -23,14 +23,32 @@
     <h3>فایل های آپلود شده تاکنون</h3>
     <div class="card">
         @if($files_number !=0)
-
         <div>
-            <div id="icc_pagination_box" class="p-4"> {{ $files->links() }} </div>
+            <table class="table table-hover table-responsive" style="overflow: auto;">
+                <thead class="text-center">
+                    <tr class="table table-dark">
+                        <th style="width: 30%">ردیف</th>
+                        <th style="width: 30%">مشاهده</th>
+                        <th style="width: 5%">عملیات</th>
+                    </tr>
+                </thead>
+                <tbody class="table-border-bottom-0">
+                    @foreach($files as $file)
+                    <tr>
+                        <td>{{$loop->index + 1}}</td>
+                        <td><a target="_blank" href='{{url("/uploader/$file/")}}' class="btn btn-primary"> لینک </a></td>
+                        <td>
+                            <button type="button" class="btn btn-danger"> حذف </button>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
         </div>
         @else
         <div class="p-3">
             <div style="text-align: center;" class="alert alert-secondary">
-                فایلی برای آپلود وجود ندارد !
+                فایلی آپلود نشده است !
             </div>
         </div>
         @endif
@@ -39,6 +57,9 @@
 @endsection
 @section('more_style')
 <style>
+    tr td {
+        text-align: center;
+    }
 </style>
 @endsection
 @section('more_js')

@@ -19,4 +19,5 @@ Route::get('/', [HomePageController::class, 'index'])->name('home_page');
 Route::get('/file_uploader', [FileUploadController::class, 'index'])->name('files_page');
 Route::post('/file_uploader', [FileUploadController::class, 'upload']);
 Route::get('/products', [ProductController::class, 'index'])->name('products_page');
+Route::post('/products', [ProductController::class, 'store']);
 Route::get('/posts', [PostController::class, 'index'])->name('posts_page');
