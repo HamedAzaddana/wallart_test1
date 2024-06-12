@@ -22,5 +22,10 @@ function get_validation_messages($more_validation = [])
         "*.min" => "تعداد کاراکتر های را کم وارد کرده اید.",
         "*.confirmed" => "تکرار رمز عبور را اشتباه وارد کرده اید."
     ];
-    return array_merge($messages,$more_validation);
+    return array_merge($messages, $more_validation);
+}
+function get_medias_model($model = "", $id = 0)
+{
+    $Model = ("App\\Models\\$model")::find($id);
+    return  $Model->getMedia('images');
 }

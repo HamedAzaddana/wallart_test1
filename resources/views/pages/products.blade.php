@@ -5,7 +5,7 @@
     <h3>فرم محصول</h3>
     <form method="POST" enctype="multipart/form-data" class="p-2">
         @csrf
-        <div class="form-group">
+        <div class="form-group mb-2">
             <label for="title">عنوان<span class="text-danger">*</span></label>
             <input type="text" class="form-control @error('title') is-invalid @enderror" name="title" value="{{  old('title') }}">
             @error('title')
@@ -14,8 +14,8 @@
             </span>
             @enderror
         </div>
-        <div class="form-group">
-            <label for="title">قیمت<span class="text-danger">*</span></label>
+        <div class="form-group mb-2">
+            <label for="title">قیمت (ریال)<span class="text-danger">*</span></label>
             <input type="text" class="form-control @error('price') is-invalid @enderror" name="price" value="{{  old('price') }}">
             @error('price')
             <span class="invalid-feedback" role="alert">
@@ -23,7 +23,7 @@
             </span>
             @enderror
         </div>
-        <div class="form-group">
+        <div class="form-group mb-2">
             <label for="description">توصیف</label>
             <textarea class="form-control @error('description') is-invalid @enderror" name="description">{{ old('description') }}</textarea>
             @error('description')
@@ -32,7 +32,7 @@
             </span>
             @enderror
         </div>
-        <div>
+        <div class="mb-2">
             <x-FilePicker name="fpath">
                 تصویر شاخص
             </x-FilePicker>
@@ -54,6 +54,7 @@
                         <th style="width: 10%">عنوان</th>
                         <th style="width: 30%">توصیف</th>
                         <th style="width: 10%">قیمت</th>
+                        <th style="width: 10%">تصویر</th>
                         <th style="width: 5%">عملیات</th>
                     </tr>
                 </thead>
@@ -61,12 +62,23 @@
                     @foreach($products as $product)
                     <?php
                     $product = (array)$product;
+                    $medias = get_medias_model("Product",$product['id']);
                     ?>
                     <tr>
                         <td>{{$loop->index + 1}}</td>
                         <td>{{$product['title']}}</td>
                         <td>{{$product['description']}}</td>
                         <td>{{$product['price']}}</td>
+                        <td>
+                            @if(@$medias[0])
+                            <?php
+                            $url_show = $medias[0]->getFullUrl();
+                            ?>
+                            <a class="btn btn-dark" target="_blank" href="{{$url_show}}">مشاهده</a>
+                            @else
+                            <p>بدون رسانه</p>
+                            @endif
+                        </td>
                         <td>
                             <button type="button" class="btn btn-danger"> حذف </button>
                             <button type="button" class="btn btn-warning"> ویرایش </button>

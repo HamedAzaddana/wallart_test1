@@ -15,9 +15,10 @@ class ProductController extends Controller
      */
     public function index()
     {
+    
         $products = ProductModel::get()->toArray();
         $products_number = count($products);
-        return view('pages.products',compact('products','products_number'));
+        return view('pages.products', compact('products', 'products_number'));
     }
 
 
@@ -27,53 +28,25 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store()
+    public function store(ProductModel $product)
     {
-        //
-    }
+        //TDOD:authorize only
+        $messages = get_validation_messages();
+        $data = request()->validate([
+            'title' =>  ['required', 'string', 'max:255'],
+            'price' =>  ['required', 'string', 'max:255'],
+            'description' =>  ['nullable', 'string'],
+            'fpath' =>  ['nullable', 'string'],
+        ], $messages);
+        $data['create_date'] = \Carbon\Carbon::now();
+        $product_id = $product->create($data)->id;
+        $fpath = @$data['fpath'];
+        if($fpath && $product_id){
+            $fpath = str_replace(env("APP_URL"),public_path(),$fpath);
+            $ProductModel = ProductModel::find($product_id); 
+            $ProductModel->addMedia($fpath)->toMediaCollection('images');
+        }
+        return redirect()->back()->with('success', "محصول با موفقیت ایجاد شد !");
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Product $product)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Product $product)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Product $product)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Product $product)
-    {
-        //
     }
 }
