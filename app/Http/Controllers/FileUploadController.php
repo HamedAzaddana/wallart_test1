@@ -9,6 +9,8 @@ class FileUploadController extends Controller
 {
     public function index()
     {
+        $is_file_picker = request("template") =="file-picker";
+        $selector_fp = request("selector_fp");
         if(!is_dir(public_path("uploader"))){
             mkdir(public_path("uploader"));
         }
@@ -19,7 +21,7 @@ class FileUploadController extends Controller
         unset($files[0]);
         unset($files[1]);
         $files_number = count($files);
-        return view('pages.file_uploader',compact('files','files_number'));
+        return view('pages.file_uploader',compact('files','files_number','is_file_picker','selector_fp'));
     }
     public function upload()
     {
